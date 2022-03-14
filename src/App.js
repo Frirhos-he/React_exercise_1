@@ -16,6 +16,7 @@ export default function App() {
   /* SCRIVI QUI IL TUO CODICE */
     const [item, setNewItem] = useState('');
 
+
     const onSubmit = useCallback((e) => {
 
       e.preventDefault();
@@ -35,8 +36,12 @@ export default function App() {
 
     const handleAverage = useMemo(() => {
 
-      const average = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
-      return average(expenses).toFixed(2).replace(".", ",");
+      const average = arr => arr.reduce((a,b) => a + b, 0) / arr.length; // prev current, initial value
+
+      const result = average(expenses);
+      if (isNaN(result)) return 0;
+      else
+      return result.toFixed(2).replace(".", ",");
 
     },[expenses]);
 
